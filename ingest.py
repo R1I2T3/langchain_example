@@ -5,7 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from uuid import uuid4
 from models import Models
-
+import time
 load_dotenv()
 model = Models()
 
@@ -40,9 +40,14 @@ def ingest_file(file_path:str):
     vector_store.add_documents(documents=documents, ids=uuids)
 
 def main():
-    for filename in os.listdir(embedding_data):
-        if filename.lower().endswith('.pdf'):
-            ingest_file(f'./data/{filename}')
+    while True:
+        for filename in os.listdir(embedding_data):
+            if not filename.startswith('ingest_'):     
+                file_path = os.path.join(embedding_data, filename)
+                ingest_file(file_path)
+                new_filename = "ingest_" + filename
+                os.rename(file_path, os.path.join(embedding_data, new_filename))
+        time.sleep(10)
 
 if __name__=="__main__":
     main()

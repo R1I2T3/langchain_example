@@ -62,3 +62,4 @@ coverage.xml
 # Logs
 *.log
 db/*
+__pycache__/*
