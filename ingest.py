@@ -33,7 +33,7 @@ def ingest_file(file_path:str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
-        separators=['\n', '.', '?', '!']
+        separators=['\n'," ","."]
     )
     documents = text_splitter.split_documents(load_document)
     uuids = [str(uuid4()) for _ in range(len(documents))]
