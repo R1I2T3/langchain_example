@@ -6,6 +6,6 @@ class Models:
             model='mxbai-embed-large'
         )
         self.chat = ChatOllama(
-            model='lama3.2:3b',
+            model='gemma:2b',
             temperature=0
         )
